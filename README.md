@@ -1,2 +1,3 @@
-# Ajanta-silai-machine
+# Ajanta Silai Machine
+
 ![](images/logo.png)

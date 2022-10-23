@@ -13,6 +13,7 @@ class searching extends StatefulWidget {
 class _searchingState extends State<searching> {
   String? searchitem;
   final db = FirebaseFirestore.instance;
+
   TextEditingController txteditingcontroller = new TextEditingController();
 
   @override

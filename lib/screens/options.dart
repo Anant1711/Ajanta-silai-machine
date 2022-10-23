@@ -8,6 +8,7 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:flutter_windowmanager/flutter_windowmanager.dart';
 import 'search.dart';
 import 'login_screen.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:chatapp/Components/roundedButton.dart';
 
 class options extends StatefulWidget {
@@ -17,11 +18,12 @@ class options extends StatefulWidget {
 }
 
 class _optState extends State<options> {
+  final dbb = FirebaseFirestore.instance;
   User user = FirebaseAuth.instance.currentUser!;
   late final String UID;
-  final String ravi = "ezWoqqqmfyc5g0h5MvNEdV3661h1";
-  final String admin = "nlFX5LKCcKWQnMnzNx3kbYwHeun1";
+  late String UemailID;
 
+  //late Future<String> _name;
   // static final DateTime now = DateTime.now();
   // static final DateFormat formatter = DateFormat('MM-dd-yyyy');
   // final String formatted = formatter.format();
@@ -32,6 +34,9 @@ class _optState extends State<options> {
 
     super.initState();
     UID = user.uid;
+    UemailID = user.email!;
+    // _name = getUserName();
+    // print(_name);
   }
 
   @override
@@ -44,6 +49,24 @@ class _optState extends State<options> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
+              // Column(
+              //   children: [
+              //     FutureBuilder(
+              //       future: _name,
+              //       builder:
+              //           (BuildContext context, AsyncSnapshot<String> snapshot) {
+              //         if (!snapshot.hasData) {
+              //           return CircularProgressIndicator();
+              //         } else {
+              //           print("Name:=== \n");
+              //           print(snapshot.data);
+              //           return Text('${snapshot.data}');
+              //         }
+              //       },
+              //     ),
+              //     Text('${UemailID}'),
+              //   ],
+              // ),
               RoundedButton(
                 textColor: Colors.black,
                 colour: Colors.white,
@@ -58,8 +81,8 @@ class _optState extends State<options> {
                 title: 'Add Item',
                 onPrsd: () {
                   if (UID == 'gxAVfFwMOiUmBB2yrC8eMH9TPcR2' ||
-                      UID == admin ||
-                      UID == ravi) {
+                      UemailID == "ajantasilaimachine@gmail.com" ||
+                      UemailID == "ravipushpak8266@gmail.com") {
                     Navigator.pushNamed(context, additem.id);
                   } else {
                     _showMyDialog();
@@ -72,8 +95,8 @@ class _optState extends State<options> {
                   title: 'Update Items',
                   onPrsd: () {
                     if (UID == 'gxAVfFwMOiUmBB2yrC8eMH9TPcR2' ||
-                        UID == admin ||
-                        UID == ravi) {
+                        UemailID == "ajantasilaimachine@gmail.com" ||
+                        UemailID == "ravipushpak8266@gmail.com") {
                       Navigator.pushNamed(context, updateitems.id);
                     } else {
                       _showMyDialog();
@@ -84,7 +107,7 @@ class _optState extends State<options> {
                 colour: Colors.red.shade700,
                 title: 'Log out',
                 onPrsd: () {
-                  if (UID == admin) {
+                  if (UemailID == "ajantasilaimachine@gmail.com") {
                     _signOutforadmin();
                   } else {
                     _signOut();
@@ -158,6 +181,12 @@ class _optState extends State<options> {
       },
     );
   }
+
+  // Future<String> getUserName() async {
+  //   DocumentSnapshot ds = await dbb.doc(UemailID).get();
+  //   String Name = ds.get('Name');
+  //   return Name;
+  // }
 
   Future<void> disableCapture() async {
     //disable screenshots and record screen in current screen
