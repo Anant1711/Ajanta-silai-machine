@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'dart:io';
-import 'package:chatapp/Components/roundedButton.dart';
+import 'package:chatapp/Components/roundbuttonforOption.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter_windowmanager/flutter_windowmanager.dart';
@@ -76,6 +76,35 @@ class _additemState extends State<additem> {
     });
   }
 
+  //for error
+  Future<void> _showMyDialogforalert(String text) async {
+    return showDialog<void>(
+      context: this.context,
+      barrierDismissible: false, // user must tap button!
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Error'),
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: <Widget>[
+                Text(text),
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: const Text('OK'),
+              onPressed: () {
+                Navigator.pop(context);
+                //Navigator.pushNamed(context, options.id);
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   //Upload images to firebase
   Future uploadFile() async {
     if (image == null) return;
@@ -88,11 +117,12 @@ class _additemState extends State<additem> {
       await ref.putFile(image!);
 
       String url = await ref.getDownloadURL();
-      print(url);
+      //print(url);
 
       additem.seturl(url);
     } catch (e) {
-      print("$e");
+      String error = "$e";
+      _showMyDialogforalert(error);
     }
   }
 
@@ -100,7 +130,7 @@ class _additemState extends State<additem> {
   Widget build(BuildContext context) {
     disableCapture();
     return Scaffold(
-      backgroundColor: Color.fromRGBO(246, 244, 235, 1),
+      backgroundColor: Color.fromRGBO(250, 243, 245, 1.0),
       body: SingleChildScrollView(
         child: Padding(
           padding: EdgeInsets.only(top: 165.0, left: 20.0, right: 20.0),
@@ -116,14 +146,14 @@ class _additemState extends State<additem> {
                 height: 24.0,
               ),
               Card(
-                color: Color.fromRGBO(246, 244, 235, 1),
+                color: Color.fromRGBO(250, 243, 245, 1.0),
                 elevation: 0,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     CircleAvatar(
                       radius: 55.0,
-                      backgroundColor: Color.fromRGBO(182, 145, 102, 1),
+                      backgroundColor: Color.fromRGBO(51, 61, 121, 1),
                       child: image != null
                           ? ClipRRect(
                               borderRadius: BorderRadius.circular(50),
@@ -195,7 +225,7 @@ class _additemState extends State<additem> {
                     SizedBox(
                       height: 24.0,
                     ),
-                    RoundedButton(
+                    RoundbuttonOP(
                         textColor: Colors.black,
                         title: 'Submit',
                         onPrsd: () {

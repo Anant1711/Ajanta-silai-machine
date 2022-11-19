@@ -1,9 +1,7 @@
 import 'dart:ui';
 import 'package:flutter_windowmanager/flutter_windowmanager.dart';
-
 import 'login_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:chatapp/Components/roundedButton.dart';
 
 class WelcomeScreen extends StatefulWidget {
   static String id = 'welcome';
@@ -24,37 +22,61 @@ class _WelcomeScreenState extends State<WelcomeScreen>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromRGBO(182, 145, 102, 1),
+      backgroundColor: Color.fromRGBO(250, 235, 239, 1.0),
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 24.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            Hero(
-              tag: 'logo',
-              child: Column(
-                children: <Widget>[
-                  Container(
-                    child: Image.asset(
-                      'images/logo.png',
-                      height: 250.0,
-                    ),
+            Column(
+              children: <Widget>[
+                Container(
+                  child: Image.asset(
+                    'images/logo.png',
+                    height: 250.0,
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
             SizedBox(
               height: 48.0,
             ),
-            RoundedButton(
-              textColor: Colors.black,
-              title: 'LogIn',
-              onPrsd: () {
-                //Go to registration screen.
-                Navigator.pushNamed(context, LoginScreen.id);
-              },
-              colour: Color.fromRGBO(246, 244, 235, 1),
+            Padding(
+              padding: const EdgeInsets.only(left: 82.0, right: 82.0),
+              child: ElevatedButton(
+                onPressed: () {
+                  Navigator.pushNamed(context, LoginScreen.id);
+                  print("Doing everything");
+                }, //This prop for beautiful expressions
+                child: Text(
+                    "Login"), // This child can be everything. I want to choose a beautiful Text Widget
+                style: ElevatedButton.styleFrom(
+                  textStyle:
+                      TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  minimumSize:
+                      Size(10, 50), //change size of this beautiful button
+                  // We can change style of this beautiful elevated button thanks to style prop
+                  primary: Color.fromRGBO(
+                      51, 61, 121, 1), // we can set primary color
+                  onPrimary: Colors.white, // change color of child prop
+                  onSurface: Colors.blue, // surface color
+                  shadowColor: Colors
+                      .grey, //shadow prop is a very nice prop for every button or card widgets.
+                  elevation: 5, // we can set elevation of this beautiful button
+                  side: BorderSide(
+                      color:
+                          Color.fromRGBO(51, 61, 121, 1), //change border color
+                      width: 2, //change border width
+                      style: BorderStyle
+                          .solid), // change border side of this beautiful button
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(
+                        30), //change border radius of this beautiful button thanks to BorderRadius.circular function
+                  ),
+                  tapTargetSize: MaterialTapTargetSize.padded,
+                ),
+              ),
             ),
           ],
         ),

@@ -40,7 +40,7 @@ class _forgotpasswdState extends State<forgotpasswd> {
   Widget build(BuildContext context) {
     disableCapture();
     return Scaffold(
-      backgroundColor: Color.fromRGBO(246, 244, 235, 1),
+      backgroundColor: Color.fromRGBO(250, 235, 239, 1.0),
       body: Padding(
         padding: EdgeInsets.only(left: 10, right: 20),
         child: Column(
@@ -70,7 +70,7 @@ class _forgotpasswdState extends State<forgotpasswd> {
                 resetpassword();
               },
               child: Text("Send reset link"),
-              color: Color.fromRGBO(182, 145, 102, 1),
+              color: Color.fromRGBO(51, 61, 121, 1),
               textColor: Colors.white,
             )
           ],

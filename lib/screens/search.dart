@@ -79,115 +79,92 @@ class _searchingState extends State<searching> {
                                     child: Container(
                                       child: ListTile(
                                         tileColor:
-                                            Color.fromRGBO(246, 244, 235, 1),
+                                            Color.fromRGBO(51, 61, 121, 1),
                                         trailing: InkWell(
-                                          child: Icon(Icons.forward),
+                                          child: Icon(
+                                            Icons.forward,
+                                            color: Colors.white,
+                                          ),
                                         ),
-                                        title: Text(ds['Name']),
+                                        title: Text(
+                                          ds['Name'],
+                                          style: TextStyle(color: Colors.white),
+                                        ),
                                         onTap: () {
-                                          showMaterialModalBottomSheet(
-                                            context: context,
-                                            builder: (context) => Container(
-                                              child: Padding(
-                                                padding:
-                                                    EdgeInsets.only(top: 50),
-                                                child: SafeArea(
-                                                  child: Column(
-                                                    children: [
-                                                      CircleAvatar(
-                                                        radius: 150.0,
-                                                        backgroundColor:
-                                                            Colors.transparent,
-                                                        child:
-                                                            CachedNetworkImage(
-                                                          imageUrl:
-                                                              ds['imageURL'],
-                                                          placeholder: (context,
-                                                                  url) =>
-                                                              CircularProgressIndicator(),
-                                                          errorWidget: (context,
-                                                                  url, error) =>
-                                                              Icon(Icons.error),
-                                                        ),
-                                                      ),
-                                                      SizedBox(
-                                                        height: 10.0,
-                                                      ),
-                                                      Text(
-                                                        ds['Name'],
-                                                        textAlign:
-                                                            TextAlign.center,
-                                                        style: TextStyle(
-                                                          fontSize: 35.0,
-                                                          fontWeight:
-                                                              FontWeight.bold,
-                                                        ),
-                                                      ),
-                                                      SizedBox(
-                                                        height: 10.0,
-                                                      ),
-                                                      Padding(
-                                                        padding:
-                                                            EdgeInsets.only(
-                                                                top: 20),
-                                                        child: Row(
-                                                          mainAxisAlignment:
-                                                              MainAxisAlignment
-                                                                  .spaceEvenly,
-                                                          children: [
-                                                            Text(
-                                                              "R: " +
-                                                                  ds['Rprice'],
-                                                              style: TextStyle(
-                                                                color: Colors
-                                                                    .redAccent,
-                                                                fontSize: 20.0,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .bold,
+                                          showDialog(
+                                              barrierDismissible: true,
+                                              context: context,
+                                              builder: (context) {
+                                                return SingleChildScrollView(
+                                                  child: AlertDialog(
+                                                    title: Center(
+                                                        child: Text(
+                                                            "${ds['Name']}")),
+                                                    content: Container(
+                                                      child: Column(
+                                                        children: [
+                                                          CachedNetworkImage(
+                                                            imageUrl:
+                                                                ds['imageURL'],
+                                                            placeholder: (context,
+                                                                    url) =>
+                                                                CircularProgressIndicator(),
+                                                            errorWidget:
+                                                                (context, url,
+                                                                        error) =>
+                                                                    Icon(Icons
+                                                                        .error),
+                                                          ),
+                                                          SizedBox(
+                                                            height: 20.0,
+                                                          ),
+                                                          Row(
+                                                            mainAxisAlignment:
+                                                                MainAxisAlignment
+                                                                    .center,
+                                                            crossAxisAlignment:
+                                                                CrossAxisAlignment
+                                                                    .center,
+                                                            children: [
+                                                              Text(
+                                                                "R: " +
+                                                                    ds['Rprice'],
+                                                                style:
+                                                                    TextStyle(
+                                                                  color: Colors
+                                                                      .redAccent,
+                                                                  fontSize:
+                                                                      20.0,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold,
+                                                                ),
                                                               ),
-                                                            ),
-                                                            // SizedBox(
-                                                            //   width: 50.0,
-                                                            // ),
-                                                            Text(
-                                                              "W: " +
-                                                                  ds['Wprice'],
-                                                              style: TextStyle(
-                                                                color: Colors
-                                                                    .green,
-                                                                fontSize: 20.0,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .bold,
+                                                              SizedBox(
+                                                                width: 50.0,
                                                               ),
-                                                            ),
-                                                          ],
-                                                        ),
+                                                              Text(
+                                                                "W: " +
+                                                                    ds['Wprice'],
+                                                                style:
+                                                                    TextStyle(
+                                                                  color: Colors
+                                                                      .green,
+                                                                  fontSize:
+                                                                      20.0,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold,
+                                                                ),
+                                                              ),
+                                                            ],
+                                                          ),
+                                                        ],
                                                       ),
-                                                      SizedBox(
-                                                        height: 150,
-                                                      ),
-                                                      Text(
-                                                        "Drag Down",
-                                                        style: TextStyle(
-                                                            color: Colors.grey,
-                                                            fontWeight:
-                                                                FontWeight.bold,
-                                                            fontSize: 15.0),
-                                                      ),
-                                                      Icon(
-                                                        Icons
-                                                            .arrow_drop_down_rounded,
-                                                        color: Colors.grey,
-                                                        size: 50.0,
-                                                      )
-                                                    ],
+                                                    ),
                                                   ),
-                                                ),
-                                              ),
-                                            ),
-                                          );
+                                                );
+                                              });
                                         },
                                       ),
                                     ),
